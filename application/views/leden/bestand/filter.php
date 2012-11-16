@@ -1,0 +1,1 @@
+de view waarin de filters worden weergegeven waarmee je door de leden kunt zoeken.

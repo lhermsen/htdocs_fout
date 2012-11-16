@@ -1,0 +1,1 @@
+hier de email die wordt verstuurd wanneer iemand zijn account heeft geactiveerd.

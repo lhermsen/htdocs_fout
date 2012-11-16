@@ -1,0 +1,1 @@
+de view waarin de gegevens van de geselecteerde reunist zullen worden weergegeven

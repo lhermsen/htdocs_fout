@@ -1,0 +1,1 @@
+﻿een entreepagina waarop de header van NoNoMes met de fotobanner staat. In het groot staat daaronder: “Ga door naar studentenvereniging NoNoMes. En daaronder in het klein: “Of ga naar de website voor reunisten >>”. Op deze pagina staat tevens de Facebook like-button.

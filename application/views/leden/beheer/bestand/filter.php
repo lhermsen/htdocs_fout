@@ -1,0 +1,1 @@
+de view waarin het filter wordt weergegeven waarmee je door de leden kunt zoeken als beheerder. Dit is natuurlijk uitgebreider dan het filter dat de normale gebruiker tot zijn beschikking heeft.

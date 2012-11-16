@@ -1,0 +1,1 @@
+hierin het stukje html dat het script voor de fotoweergave  laadt.

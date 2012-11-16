@@ -1,0 +1,1 @@
+de view waarin de gegevens van het geselecteerde lid zullen worden weergegeven.

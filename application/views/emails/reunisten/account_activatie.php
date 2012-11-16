@@ -1,0 +1,1 @@
+e-mail die wordt verstuurd wanneer een bezoeker zich in wil schrijven in het reunistenbestand en deze bezoeker als reunist wordt geidentificeerd. Bevat een link om het account te activeren.

@@ -1,0 +1,1 @@
+de ‘interface’ van het gebruikersbestand. (De gebruikerslijst op lichting van het huidige systeem gooien we weg, aangezien dit niets toevoegt.) Dit is zeg maar het frame waarin de onderdelen geplaatst worden. Denk aan de <div>’s die alles op zijn plek houden. Op de plekken waar de onderdelen geplaatst moeten worden, roep je de views van die onderdelen aan met een php commando.

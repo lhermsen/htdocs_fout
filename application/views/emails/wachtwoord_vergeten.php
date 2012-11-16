@@ -1,0 +1,1 @@
+hier de email met een nieuw wachtwoord voor de gebruiker

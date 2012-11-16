@@ -1,0 +1,1 @@
+hier komt het formulier waarmee je de gegevens van een gebruiker van het systeem aanpast. Dit zal voor reunisten hetzelfde zijn als voor leden, dus vandaar dat het in deze map staat. Momenteel is dit /views/leden/bewerklid.php.

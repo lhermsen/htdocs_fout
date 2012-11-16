@@ -1,0 +1,1 @@
+de link naar de kennisbank van de Senaat en de link naar de inschrijfpagina. 

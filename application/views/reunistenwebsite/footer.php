@@ -1,0 +1,1 @@
+alles wat iedere pagina onderaan moet hebben staan.

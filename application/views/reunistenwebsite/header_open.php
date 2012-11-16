@@ -1,0 +1,1 @@
+ alles wat iedere pagina aan de bovenkant moet hebben staan, boven de </head>-tag. Eindig deze view net voor de </head>-tag.

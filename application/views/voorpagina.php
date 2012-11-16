@@ -1,0 +1,1 @@
+﻿gewoon de voorpagina met de slideshow, agenda en daaronder over de gehele breedte een nieuws-sectie die aan te passen is door beheerders. De header moet overigens niet meer de banner met foto’s tonen.

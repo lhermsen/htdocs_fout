@@ -1,0 +1,1 @@
+hier de nieuwsbox voor leden. Hierin kun je het scriptje plaatsen waardoor de inhoud aan te passen is door een beheerder.

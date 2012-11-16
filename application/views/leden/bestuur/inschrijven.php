@@ -1,0 +1,1 @@
+alleen het bestuur van een vereniging kan leden inschrijven. Vandaar dat ik deze view in deze map zet. Hier komt dus het formulier in waarmee mensen zich kunnen inschrijven bij NoNoMes.
