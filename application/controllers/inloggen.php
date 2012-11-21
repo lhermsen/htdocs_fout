@@ -9,6 +9,8 @@ class Inloggen extends CI_Controller {
 		
 		if($this->ipadres_model->is_geblokkeerd()) $this->geblokkeerd();
 		if($this->gebruiker_model->is_ingelogd()) $this->_doorsturen();
+		
+		echo 'HOOOI HOORNSTRA';
 	}
 
 	public function index()
