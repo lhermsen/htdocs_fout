@@ -2,7 +2,10 @@
 
 class Gebruiker_model extends CI_Model {
 
-	var $aDatabase;
+	var $aDatabase = array();
+	
+	var $aSubgroepIds = array();
+	var $aSubgroepNamen = array();
 
 	function refresh()
 	{
@@ -10,10 +13,30 @@ class Gebruiker_model extends CI_Model {
 		$this->set($this->aDatabase['id']);
 	}
 	
-	function set($iId)
+	function set($iId, $bIdIsGecodeerd = false)
 	{
+		if($bIdIsGecodeerd) $iId = $this->decodeer_id($iId);
+		
 		// Haal alle data van deze gebruikers_id uit de database en zet de vars
 		$this->aDatabase = $this->db->get_where('gebruikers',array('id'=>$iId))->row_array();
+		
+		// Inventariseer tot welke subgroepen deze gebruiker behoort
+		
+		$this->db->where('gebruiker_id', $iId);
+		$aGekoppeldeSubgroepen = $this->db->get('gebruiker_subgroep')->result_array();
+		
+		// Doorloop alle subgroepen die gekoppeld zijn aan deze gebruiker
+		foreach($aGekoppeldeSubgroepen as $aGekoppeldeSubgroep)
+		{
+			// Haal de record van deze gekoppelde subgroep op uit de database
+			$aSubgroep = $this->db->get_where('subgroepen', array('id'=>$aGekoppeldeSubgroep['subgroep_id']));
+			
+			// Zet in een array de id van deze subgroep waartoe deze gebruiker behoort
+			$this->aSubgroepIds[] = $aSubgroep['id'];
+			
+			// Zet in een array de naam van deze subgroep waartoe deze gebruiker behoort
+			$this->aSubgroepnamen[] = $aSubgroep['naam'];
+		}
 	}
 	
 	function nieuw($aGegevens, $bVerzend_Email = false)
@@ -120,6 +143,13 @@ class Gebruiker_model extends CI_Model {
 		$this->refresh(); // Update de waarden van dit object
 	}
 	
+	function nooit_eerder_ingelogd()
+	{
+		// Als het veld met het tijdstip waarop voor het laatst is ingelogd nog leeg is, dan is deze gebruiker nog nooit eerder ingelogd geweest
+		if($this->aDatabase['last_login'] == '') return true;
+		return false;
+	}
+	
 	function is_ingelogd()
 	{
 		// Controleer of deze gebruiker is ingelogd
@@ -128,14 +158,21 @@ class Gebruiker_model extends CI_Model {
 		return false;
 	}
 	
+	function decodeer_id($sIdGecodeerd)
+	{
+		// Decodeer het id-nummer
+
+		$sIdEncrypted = base64_decode($sIdGecodeerd);
+		$iId = $this->encrypt->decode($sIdEncrypted);
+		
+		return $iId;
+	}
+	
 	function wachtwoord_instellen($sIdGecodeerd, $sWachtwoord)
 	{
 		try
 		{
-			// Decodeer het id-nummer
-	
-			$sIdEncrypted = base64_decode($sIdGecodeerd);
-			$iId = $this->encrypt->decode($sIdEncrypted);
+			$iId = $this->decodeer_id($sIdGecodeerd); // Decodeer Id-nummer
 			
 			// Zet het wachtwoord in de database
 			
@@ -203,6 +240,15 @@ class Gebruiker_model extends CI_Model {
 		return true;
 	}
 
+	function is_reunist()
+	{
+		// Return true als deze gebruiker behoort tot de subgroep 'reunisten'
+		if(in_array('reunisten',$this->aSubgroepnamen)) return true;
+		
+		// Zo niet, return false
+		return false;
+	}
+	
 	function zichtbare_gebruikers()
 	{
 	
@@ -216,15 +262,9 @@ class Gebruiker_model extends CI_Model {
 		|-----------------------------------------------------------------------------
 		*/
 		
-		// Inventariseer eerst tot welke subgroepen deze ingelogde gebruiker behoort
-		
-		$this->db->select('subgroep_id');
-		$this->db->where('gebruiker_id', $this->aDatabase['id']);
-		$aSubgroepIds = $this->db->get('gebruiker_subgroep')->result_array();
-		
 		$sQuery = "";
 		
-		foreach($aSubgroepIds as $iKeySubroep => $iSubgroepId) // Doorloop alle idnummers van de subgroepen waartoe deze gebruiker behoort
+		foreach($this->aSubgroepIds as $iSubgroepId) // Doorloop alle idnummers van de subgroepen waartoe deze gebruiker behoort
 		{
 			// Kijk vervolgens per gebruiker wat die wil delen aan de subgroepen waar deze gebruiker toe behoort. 
 			

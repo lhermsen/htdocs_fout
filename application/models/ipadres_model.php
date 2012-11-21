@@ -4,17 +4,21 @@ class Ipadres_model extends CI_Model {
 
 	var $aIpadres = array();
 	
-	function $this->refresh()
+	function __construct()
+	{
+		parent::__construct();
+		
+		$this->refresh();
+	}
+	
+	function refresh()
 	{
 		// Haal het record op dat hoort bij dit IP-adres
-		
 		$this->aIpadres = $this->db->get_where('ipadressen',array('ipadres'=>$this->input->ip_address()))->row_array();
 	}
 	
 	function is_geblokkeerd()
     {
-        $this->refresh(); // Gegevens over dit ipadres ophalen
-		
 		// Check of dit ip adres geblokkeerd is volgens de tabel inlogpogingen en return true/false
 		
 		$iTijdstipBlokkeringOpheffen = $this->aIpadres['tijdstip_geblokkeerd'] + $this->config->item('iAantalSecondenBlokkeren');
@@ -24,8 +28,6 @@ class Ipadres_model extends CI_Model {
 	
 	function berisp()
 	{
-		$this->refresh(); // Gegevens over dit ipadres ophalen
-		
 		// Checken of het limiet wordt bereikt als dit ipadres wordt berispt
 		if(($this->aIpadres['berispingen']+1) == $this->config->item('iLimietBerispingen')) 
 		{
@@ -41,19 +43,22 @@ class Ipadres_model extends CI_Model {
 			$this->db->where('ipadres', $this->input->ip_address());
 			$this->db->update('ipadressen', array('berispingen'=>($this->aIpadres['berispingen']+1)));
 		}
+		
+		// Return het huidige nieuwe berispingen
+		
+		$this->refresh();
+		return $this->aIpadres['berispingen'];
 	}
 	
 	function nog_geblokkeerd()
 	{
-		$this->refresh(); // Gegevens over dit ipadres ophalen
-		
 		// Uitrekenen hoelang nog geblokkeerd
 		
 		$iAlGeblokkeerd = time() - $this->aIpadres['tijdstip_geblokkeerd'];
 		$iNogGeblokkeerd = $this->config->item('iAantalSecondenBlokkeren') - $iAlGeblokkeerd;
 		
-		// Return hoelang nog geblokkeerd
-		return $iNogGeblokkeerd.' seconde';
+		// Return hoelang nog geblokkeerd in seconden
+		return $iNogGeblokkeerd;
 	}
 }
 

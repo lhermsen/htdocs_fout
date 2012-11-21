@@ -8,6 +8,9 @@ $config['index_page'] = '';
 |--------------------------------------------------------------------------
 */
 
+// Het info-emailadres voor de klant
+$config['sEmailInfo'] = 'info@nonomes.nl';
+
 // Het emailadres vanwaar e-mails standaard dienen te worden verzonden 
 $config['sEmailFrom'] = 'info@nonomes.nl';
 
@@ -25,4 +28,4 @@ $config['sEmailReplyTo'] = 'info@nonomes.nl';
 $config['iAantalSecondenBlokkeren'] = 60;
 
 // Hoeveel berispingen voordat het ipadres geblokkeerd wordt
-$config['iLimietBerispingen'] = 60; 
+$config['iLimietBerispingen'] = 4;
