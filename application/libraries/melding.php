@@ -14,7 +14,7 @@ class Melding {
         // Log de melding in de database
 		
 		$aMelding = array('type'=>$sType,'melding'=>$sMelding,'opmerkingen'=>$sLogOpmerkingen);
-		$this->db->insert('logboek_meldingen',$aMelding);
+		$this->db->insert('meldingenlogboek',$aMelding);
 		
 		// Laad view en geef de juiste melding weer
 		$this->load->view('melding/'.$sType, array('melding'=>$sMelding));

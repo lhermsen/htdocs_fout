@@ -206,6 +206,9 @@ class Gebruiker_model extends CI_Model {
 		$this->db->where(array('emailadres', $sEmailadres);
 		$aGebruiker = $this->db->get('gebruikers')->row_array();
 		
+		// Als er geen gebruiker wordt gevonden bij het emailadres, return false
+		if(empty($aGebruiker['id'])) return false;
+		
 		// Genereer random wachtwoord
 		
 		$this->load->helper('string');
@@ -228,6 +231,8 @@ class Gebruiker_model extends CI_Model {
 		$this->email->to($aDatabase['emailadres']);
 		$this->email->subject($sOnderwerp);
 		$this->email->verzend_bericht($sBericht);
+		
+		return true; // True als alles gelukt is
 	}
 	
 	function wijzig($aGegevens)

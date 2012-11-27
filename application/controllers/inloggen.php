@@ -4,6 +4,8 @@ class Inloggen extends CI_Controller {
 
 	public function __construct()
 	{
+		parent::__construct();
+		
 		$this->load->model('ipadres_model');
 		$this->load->model('gebruiker_model');
 		
@@ -117,6 +119,41 @@ class Inloggen extends CI_Controller {
 			$this->melding->geef('fatale_fout',$sMelding, $sLogMelding);
 			$this->pagina->footer();
 		}
+	}
+	
+	public function wachtwoord_vergeten()
+	{
+		// Haal het eventuele emailadres uit de postdata
+		$sEmail = $this->input->post('email');
+		
+		// Laad header van de pagina
+		$this->pagina->header();
+		
+		// Als het formulier verstuurd is
+		if($sEmail != '')
+		{
+			// Probeer het wachtwoord te resetten met het gekregen emailadres
+			if($this->gebruiker_model->reset_wachtwoord($sEmail))
+			{
+				// Als het wachtwoord resetten is gelukt
+				
+				$sMelding = 'Uw wachtwoord is opnieuw ingesteld en per email naar u verzonden';
+				$this->melding->geef('succes',$sMelding, 'Wachtwoord succesvol gereset door '.$sEmail);
+			}
+			else
+			{
+				// Als het wachtwoord resetten is mislukt
+				
+				$sMelding = 'Uw wachtwoord kon niet opnieuw ingesteld worden. Controleer of u het juiste emailadres heeft ingevuld.';
+				$this->melding->geef('fout',$sMelding, 'Wachtwoord kon niet gereset worden voor '.$sEmail);
+			}
+		}
+		
+		// Toon formulier om het emailadres in te vullen
+		$this->load->view('wachtwoord_vergeten');
+		
+		// Laad footer van de pagina
+		$this->pagina->footer();
 	}
 	
 	public function _doorsturen()
