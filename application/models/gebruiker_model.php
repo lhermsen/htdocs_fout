@@ -7,38 +7,6 @@ class Gebruiker_model extends CI_Model {
 	var $aSubgroepIds = array();
 	var $aSubgroepNamen = array();
 
-	function refresh()
-	{
-		// Update de waarden van deze gebruiker in dit object
-		$this->set($this->aDatabase['id']);
-	}
-	
-	function set($iId, $bIdIsGecodeerd = false)
-	{
-		if($bIdIsGecodeerd) $iId = $this->decodeer_id($iId);
-		
-		// Haal alle data van deze gebruikers_id uit de database en zet de vars
-		$this->aDatabase = $this->db->get_where('gebruikers',array('id'=>$iId))->row_array();
-		
-		// Inventariseer tot welke subgroepen deze gebruiker behoort
-		
-		$this->db->where('gebruiker_id', $iId);
-		$aGekoppeldeSubgroepen = $this->db->get('gebruiker_subgroep')->result_array();
-		
-		// Doorloop alle subgroepen die gekoppeld zijn aan deze gebruiker
-		foreach($aGekoppeldeSubgroepen as $aGekoppeldeSubgroep)
-		{
-			// Haal de record van deze gekoppelde subgroep op uit de database
-			$aSubgroep = $this->db->get_where('subgroepen', array('id'=>$aGekoppeldeSubgroep['subgroep_id']));
-			
-			// Zet in een array de id van deze subgroep waartoe deze gebruiker behoort
-			$this->aSubgroepIds[] = $aSubgroep['id'];
-			
-			// Zet in een array de naam van deze subgroep waartoe deze gebruiker behoort
-			$this->aSubgroepnamen[] = $aSubgroep['naam'];
-		}
-	}
-	
 	function nieuw($aGegevens, $bVerzend_Email = false)
 	{
 		// Zet de datum in het juiste format als dat nog niet gedaan is
@@ -76,9 +44,47 @@ class Gebruiker_model extends CI_Model {
 			$this->email->subject($aGegevens['voornaam'].' '.$aGegevens['achternaam'].', stel uw wachtwoord in');
 			$this->email->verzend_bericht($sBericht);
 			
-			$this->db->where('id' => $iId);
+			$this->db->where('id', $iId);
 			$this->db->update('gebruikers', array('activatiemail_ontvangen'=>1));
 		}
+	}
+	
+	function set($iId, $bIdIsGecodeerd = false)
+	{
+		if($bIdIsGecodeerd) $iId = $this->decodeer_id($iId);
+		
+		// Haal alle data van deze gebruikers_id uit de database en zet de vars
+		$this->aDatabase = $this->db->get_where('gebruikers',array('id'=>$iId))->row_array();
+		
+		// Inventariseer tot welke subgroepen deze gebruiker behoort
+		
+		$this->db->where('gebruiker_id', $iId);
+		$aGekoppeldeSubgroepen = $this->db->get('gebruiker_subgroep')->result_array();
+		
+		// Doorloop alle subgroepen die gekoppeld zijn aan deze gebruiker
+		foreach($aGekoppeldeSubgroepen as $aGekoppeldeSubgroep)
+		{
+			// Haal de record van deze gekoppelde subgroep op uit de database
+			$aSubgroep = $this->db->get_where('subgroepen', array('id'=>$aGekoppeldeSubgroep['subgroep_id']));
+			
+			// Zet in een array de id van deze subgroep waartoe deze gebruiker behoort
+			$this->aSubgroepIds[] = $aSubgroep['id'];
+			
+			// Zet in een array de naam van deze subgroep waartoe deze gebruiker behoort
+			$this->aSubgroepnamen[] = $aSubgroep['naam'];
+		}
+	}
+		
+	function refresh()
+	{
+		// Update de waarden van deze gebruiker in dit object
+		$this->set($this->aDatabase['id']);
+	}
+	
+	function publiekelijk()
+	{			
+		// Zet in een array de id van deze subgroep waartoe deze gebruiker behoort (publiekelijk)
+		$this->aSubgroepIds = array(99999999);
 	}
 	
 	function authenticeer($sEmail = '', $sMd5Wachtwoord = '')
@@ -143,18 +149,21 @@ class Gebruiker_model extends CI_Model {
 		$this->refresh(); // Update de waarden van dit object
 	}
 	
-	function nooit_eerder_ingelogd()
-	{
-		// Als het veld met het tijdstip waarop voor het laatst is ingelogd nog leeg is, dan is deze gebruiker nog nooit eerder ingelogd geweest
-		if($this->aDatabase['last_login'] == '') return true;
-		return false;
-	}
-	
 	function is_ingelogd()
 	{
 		// Controleer of deze gebruiker is ingelogd
 		
-		if($_SESSION['gebruiker'] == $this->aDatabase['id']) return true;
+		if(isset($_SESSION['gebruiker']))
+		{
+			// Haal de gegevens van de ingelogde gebruiker op
+			$this->set($_SESSION['gebruiker']);
+			
+			// Als er iets is foutgegaan in het identificeren van de gebruiker met de sessie
+			if(empty($this->aDatabase['id'])) return false;
+			
+			return true;
+		}
+		
 		return false;
 	}
 	
@@ -185,10 +194,10 @@ class Gebruiker_model extends CI_Model {
 			
 			// Stuur een email naar de gebruiker met behulp van de email library
 			
-			$sBericht = $this->load->view('emails/account_geactiveerd',$aDatabase, true);
+			$sBericht = $this->load->view('emails/wachtwoord_ingesteld',$aDatabase, true);
 			
 			$this->email->to($aDatabase['emailadres']);
-			$this->email->subject('Account Geactiveerd');
+			$this->email->subject('Wachtwoord Ingesteld');
 			$this->email->verzend_bericht($sBericht);
 		}
 		catch(Exception $e)
@@ -203,7 +212,7 @@ class Gebruiker_model extends CI_Model {
 	{
 		// Selecteer gebruiker bij dit emailadres.
 		
-		$this->db->where(array('emailadres', $sEmailadres);
+		$this->db->where('emailadres', $sEmailadres);
 		$aGebruiker = $this->db->get('gebruikers')->row_array();
 		
 		// Als er geen gebruiker wordt gevonden bij het emailadres, return false
@@ -259,7 +268,7 @@ class Gebruiker_model extends CI_Model {
 	
 	}
 	
-	function zichtbare_gebruikersdata($iGebruiker)
+	function zichtbare_gebruikersdata()
 	{
 		/*
 		|----------------------------------------------------------------------------
@@ -291,6 +300,38 @@ class Gebruiker_model extends CI_Model {
 		return $aGedeeldeGebruikersData;
 	}
 	
+	function heeft_recht($sUri)
+	{
+		// Kijk of de ingelogde gebruiker het recht heeft om deze pagina te zien
+		
+		if(empty($sUri)) return true;
+		
+		foreach($this->aSubgroepIds as $iSubgroepId) // Doorloop alle idnummers van de subgroepen waartoe deze gebruiker behoort
+		{
+			// Haal de rechten op van deze subgroep
+			
+			$this->db->where('subgroep_id', $iSubgroepId);
+			$aRechten = $this->db->get('rechten')->result_array();
+			
+			// Doorloop alle rechten van deze subgroep waartoe de gebruiker behoort. Kijk of de subgroep het recht heeft om deze uri te zien.
+			foreach($aRechten as $aRecht)
+			{
+				// Als de gebruiker deze uri mag zien, return true
+				if($aRecht['uri'] == $sUri) return true;
 	
+				// Als er een sterretje staat in het 'recht' in de database,  dan moet de gebruiker recht krijgen tot een volledige map (bijvoorbeeld: leden/*)
+				if(strpos($aRecht['uri'], '*') !== false)
+				{
+					$aRechtMap = explode("/*",$aRecht['uri']);
+					$sRechtMap = $aRechtMap[0];
+				
+					// Kijk of de huidige uri in de map ligt waar de gebruiker toegang toe heeft. Zo ja, verleen dan de toegang.
+					if(substr($sUri, 0, strlen($sRechtmap)) == $sRechtMap) return true;
+				}
+			}
+			
+			// Geen positief resultaat? Dan return false.
+			return false;
+		}
+	}
 }
-

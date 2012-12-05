@@ -11,8 +11,6 @@ class Inloggen extends CI_Controller {
 		
 		if($this->ipadres_model->is_geblokkeerd()) $this->geblokkeerd();
 		if($this->gebruiker_model->is_ingelogd()) $this->_doorsturen();
-		
-		echo 'HOOOI HOORNSTRA';
 	}
 
 	public function index()
@@ -71,7 +69,7 @@ class Inloggen extends CI_Controller {
 				// Geef waarschuwingsmelding
 				
 				$this->pagina->header();
-				$this->melding->geef('fout',$sMelding, 'Ipadres '.$this->ipadres_model->aIpadres['ipadres'].' geblokkeerd wegens teveel inlogpogingen');
+				$this->melding->geef('fout',$sMelding, 'Ipadres '.$this->input->ip_address().' geblokkeerd wegens teveel inlogpogingen');
 				$this->pagina->footer();
 			}
 		}
@@ -87,7 +85,7 @@ class Inloggen extends CI_Controller {
 		// Toon wachtwoord-instel-formulier
 		
 		$this->pagina->header();
-		$this->load->view('wachtwoord_instellen',array('aGebruiker'=>$aGebruiker));
+		$this->load->view('wachtwoord_instellen', array('aGebruiker'=>$aGebruiker));
 		$this->pagina->footer();
 	}
 	
@@ -130,7 +128,7 @@ class Inloggen extends CI_Controller {
 		$this->pagina->header();
 		
 		// Als het formulier verstuurd is
-		if($sEmail != '')
+		if(!empty($sEmail))
 		{
 			// Probeer het wachtwoord te resetten met het gekregen emailadres
 			if($this->gebruiker_model->reset_wachtwoord($sEmail))
@@ -163,7 +161,7 @@ class Inloggen extends CI_Controller {
 		
 		// Stuur door naar de wijzig-pagina wanneer de gebruiker voor de eerste keer inlogt
 		
-		if($this->gebruiker_model->nooit_eerder_ingelogd()) 
+		if(isset($_SESSION['eerstelogin']))
 		{
 			redirect(base_url($sGedeelte.'/wijzig'));
 		}

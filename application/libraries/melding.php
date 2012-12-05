@@ -11,12 +11,14 @@ class Melding {
 	
     function geef($sType, $sMelding, $sLogOpmerkingen = '')
     {
-        // Log de melding in de database
+        $CI =& get_instance();
+		
+		// Log de melding in de database
 		
 		$aMelding = array('type'=>$sType,'melding'=>$sMelding,'opmerkingen'=>$sLogOpmerkingen);
-		$this->db->insert('meldingenlogboek',$aMelding);
+		$CI->db->insert('meldingenlogboek',$aMelding);
 		
 		// Laad view en geef de juiste melding weer
-		$this->load->view('melding/'.$sType, array('melding'=>$sMelding));
+		$CI->load->view('melding/'.$sType, array('melding'=>$sMelding));
     }
 }
