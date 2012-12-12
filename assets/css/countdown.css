@@ -1,0 +1,36 @@
+#countdowntext{
+	font-family: "DistrictThin", Trebuchet MS, Arial;
+	font-size:30px;
+	color:#1D1D1D;
+	text-align:center;
+	margin-top:5px;
+
+}
+.countdown{
+	margin:23px auto 0px;
+	width:460px;
+	height:93px;
+	background:url('/assets/images/countdown.png') top center no-repeat;
+	display:block;
+	padding:18px 0 0px;
+}
+.countdown_section{
+	width:115px;
+	height:93px;
+	float:left;
+	text-align:center;
+}
+.countdown_amount{
+	font-family: Arial, Verdana;
+	font-size:40px;
+	font-weight:bold;
+	color:#fff;
+	line-height:40px;
+}
+.countdown_day{
+	font-family: Arial, Verdana;
+	font-size:14px;
+	text-transform:lowercase;
+	color:#fff;
+	
+}

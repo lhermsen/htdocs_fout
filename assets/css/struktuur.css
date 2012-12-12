@@ -1,0 +1,131 @@
+body {
+	background: #eee;
+}
+
+ol,ul {
+	line-height: 26px;
+}
+
+/* BEGIN CSS POPUP */
+
+#blanket {
+background-color:#111;
+opacity: 0.65;
+filter:alpha(opacity=65);
+position:absolute;
+z-index: 9001;
+top:0px;
+left:0px;
+width:100%;
+height:200%;
+}
+
+#popupimage {
+position: absolute;
+border:10px #fff solid;
+width:898px;
+height: 634px;
+top: 50%;
+margin-top:-317px;
+left:50%;
+margin-left:-450px;
+z-index: 9002;
+}
+
+#sluiten{
+position: absolute;
+top:0px;
+right:0px;
+display: none;
+border:0px;
+}
+
+/* EINDE CSS POPUP */
+
+
+#header {
+	position: absolute;
+	background: #181818;
+	width: 100%;
+	height: 512px;
+	top: 0px;
+	left: 0px;
+	overflow: hidden;
+}
+
+#container {
+	position: absolute;
+	width: 1003px;
+	left: 50%;
+	top: 0px;
+	margin-left: -501px;
+}
+
+#lichteffect{
+	position: absolute;
+	top: 0px;
+	left: 50%;
+	margin-left: -281px;
+	z-index: 0;
+}
+
+#wapen {
+	position: absolute;
+	left:-20px;
+	top:0px;
+	z-index: 1;
+	border:none;
+}
+
+#nonomes {
+	position: absolute;
+	left:335px;
+	top:63px;
+	z-index: 1;
+}
+
+#navigatie {
+	position: absolute;
+	right: 20px;
+	top: 16px;
+	text-align: right;
+	line-height: 24px;
+	z-index: 2;
+}
+
+#nonomesleden {
+	position: absolute;
+	left: 0px;
+	top: 220px;
+	z-index: 1;
+}
+
+#contact, #ingelogd_als {
+	font-family: "DistrictThin", Trebuchet MS, Arial;
+	position: absolute;
+	color: white;
+	z-index: 1;
+}
+
+#ingelogd_als {
+	font-size: 13px;
+	left: 335px;
+	top: 185px;
+}
+
+#contact {
+	font-size: 15px;
+	right: 0px;
+	top: 484px;
+}
+
+#inhoud {
+	position: relative;
+	left: 0px;
+	top: 546px;
+	overflow: auto;
+}
+
+
+
+

@@ -1,0 +1,412 @@
+@font-face {
+    font-family: 'DistrictThin';
+    src: url('../fonts/distth__-webfont.eot');
+    src: url('../fonts/distth__-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/distth__-webfont.woff') format('woff'),
+         url('../fonts/distth__-webfont.ttf') format('truetype'),
+         url('../fonts/distth__-webfont.svg#DistrictThin') format('svg');
+    font-weight: bold;
+    font-style: normal;
+
+} 
+
+body {
+	font-family: Arial, Verdana;
+	font-size: 14px;
+	font-smooth: always;
+	color:#1D1D1D;
+}
+
+th,td { 
+	text-align:left; 
+	vertical-align: top;
+}
+
+h1 {
+	font-family: "DistrictThin", Trebuchet MS, Arial;
+	font-size: 25px;
+	letter-spacing:1px;
+	margin: 20px 0px;
+}
+
+h2 {
+	font-family: "DistrictThin", Trebuchet MS, Arial;
+	font-size: 20px;
+	color: #e77200;
+}
+
+h3 {
+	font-family: Verdana, Arial;
+	font-size: 20px;
+	font-weight: normal;
+	margin-top:6px;
+	margin-bottom:10px;
+}
+
+b {
+	color: #e77200;
+}
+
+a {
+	color: #0090ff;
+	text-decoration:none;
+}
+
+a:hover {
+	color: #0090ff;
+	text-decoration:underline;
+}
+
+p {
+	line-height: 30px;
+}
+
+iframe {
+	border:none;
+}
+
+#inhoud a {
+	color: #009f43;
+	text-decoration:underline;
+}
+
+#inhoud a b {
+	color: #e77200;
+	text-decoration:underline;
+}
+
+#inhoud img {
+	padding:1px;
+	border: 1px solid #000;
+}
+
+.verband {
+	padding:0px 12px 0px 12px;
+	overflow:auto;
+}
+
+.verband:hover {
+	background: #fff;
+	cursor: pointer;
+}
+
+.wapen {
+	float:left;
+	width:133px;
+	height:126px;
+	margin:0px 12px 12px 0px;
+}
+
+.dispuutsomschrijving {
+	text-align:justify;
+	line-height: 30px;
+	margin-top:-7px;
+	float:right;
+	width:790px;
+}
+
+.info_message, .success_message, .warning_message, .error_message {
+	vertical-align:middle;
+	background:#fff7d3;
+	padding: 12px;
+	padding-left: 50px;
+	margin-bottom:15px;
+	background-repeat: no-repeat;
+	background-position: 10px center;
+}
+.info_message {
+  color: #00529B;
+  border:#3B9EF0 1px solid;
+  background-color: #BDE5F8;
+  background-image: url('/assets/images/icons/info.png');
+}
+.success_message {
+  color: #4F8A10;
+  border:#ABE71D 1px solid;
+  background-color: #DDEBB2;
+  background-image:url('/assets/images/icons/succes.png');
+}
+.warning_message {
+  color: #9F6000;
+  border:#F8CA30 1px solid;
+  background-color: #FFF7D3;
+  background-image:url('/assets/images/icons/warning.png');
+}
+.error_message {
+  color: #D8000C;
+  border:#E12829 1px solid;
+  background-color: #FFBABA;
+  background-image:url('/assets/images/icons/error.png');
+}
+
+.pijltje {
+	position:absolute;
+	right: -10px;
+	margin-top: 7px;
+	display: none;
+}
+
+.box {
+	margin-left: auto;
+	margin-right: auto;
+	background: #ABDDC9;
+	border:#88AFA0 1px solid;
+	padding: 12px 20px;
+}
+
+.tegel {
+	float: left;
+	margin:12px;
+	background: #fff7d3;
+	border:#ffd822 1px solid;
+	padding: 20px;
+}
+
+.tegel:hover {
+	background: #fff1b0;
+	cursor:pointer;
+}
+
+.tegel_ledengedeelte {
+	text-align:center;
+	width: 130px;
+}
+
+.grote_invoer {
+    padding: 13px;
+    margin: 0;
+    width: 300px;
+    font-size:13px;
+    border: 1px solid #BCBCBC;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    -moz-box-shadow: 0 1px 1px #ccc inset, 0 1px 0 #fff;
+    -webkit-box-shadow: 0 1px 1px #ccc inset, 0 1px 0 #fff;
+    box-shadow: 0 1px 1px #ccc inset, 0 1px 0 #fff;
+
+}
+
+.grote_invoer:focus
+{
+    background-color: #fff;
+    border: 1px solid #13b7da;
+    outline: none;
+    -moz-box-shadow: 0 0 2px #13b7da, transparent 0 0 0;
+    -webkit-box-shadow: 0 0 2px #13b7da, transparent 0 0 0;
+    box-shadow: 0 0 2px #13b7da, transparent 0 0 0;
+}
+
+.grote_invoer:disabled
+{
+    background-color: inherit;
+    border: none;
+    box-shadow:none;
+    color:#1D1D1D;
+}
+
+.grote_knop {
+	margin-top:10px;
+	width:325px;
+	height: 40px;
+}
+
+.hoverbox {
+	visibility:hidden;
+	border:1px solid #f3d400;
+	background: #fff3a0;
+	position:absolute;
+	left:220px;
+	padding:10px;
+}
+
+#login
+{
+    background-color: #fff;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#eee));
+    background-image: -webkit-linear-gradient(top, #fff, #eee);
+    background-image: -moz-linear-gradient(top, #fff, #eee);
+    background-image: -ms-linear-gradient(top, #fff, #eee);
+    background-image: -o-linear-gradient(top, #fff, #eee);
+    background-image: linear-gradient(top, #fff, #eee);  
+	line-height: 22px;
+    width: 400px;
+    margin: 10px auto 25px auto;
+    padding: 5px 30px 25px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;  
+    -webkit-box-shadow:
+          0 0 2px rgba(0, 0, 0, 0.2),
+          0 1px 1px rgba(0, 0, 0, .2);
+    -moz-box-shadow:
+          0 0 2px rgba(0, 0, 0, 0.2),  
+          1px 1px   0 rgba(0,   0,   0,   .1);
+    box-shadow:
+          0 0 2px rgba(0, 0, 0, 0.2),  
+          0 1px 1px rgba(0, 0, 0, .2);
+}
+
+/*--------------------*/
+
+fieldset
+{
+    border: 0;
+    padding: 0;
+    margin: 0;
+    margin-bottom:5px;
+}
+
+/*--------------------*/
+
+#inputs input
+{
+    background: #f1f1f1 url('/assets/images/icons/login-sprite.png') no-repeat;
+    padding: 15px 15px 15px 30px;
+    margin: 5px 0 5px 0;
+    width: 353px; /* 353 + 2 + 45 = 400 */
+    border: 1px solid #BCBCBC;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    -moz-box-shadow: 0 1px 1px #ccc inset, 0 1px 0 #fff;
+    -webkit-box-shadow: 0 1px 1px #ccc inset, 0 1px 0 #fff;
+    box-shadow: 0 1px 1px #ccc inset, 0 1px 0 #fff;
+}
+
+#emailadres
+{
+	background: #fff url('/assets/images/icons/login-sprite.png') no-repeat;
+    background-position: 8px -2px !important;
+    padding-left:30px;
+}
+
+#wachtwoord
+{
+	background: #fff url('/assets/images/icons/login-sprite.png') no-repeat;
+    background-position: 8px -52px !important;
+    padding-left:30px;
+}
+
+#wachtwoord_email
+{
+	background: #fff url('/assets/images/icons/login-sprite.png') no-repeat;
+    background-position: 8px -52px !important;
+    padding-left:30px;
+}
+
+#wachtwoord_confirm
+{
+	background: #fff url('/assets/images/icons/login-sprite.png') no-repeat;
+    background-position: 8px -103px !important;
+    padding-left:30px;
+}
+
+#inputs input:focus
+{
+    background-color: #fff;
+    border-color: #e8c291;
+    outline: none;
+    -moz-box-shadow: 0 0 0 1px #e8c291 inset;
+    -webkit-box-shadow: 0 0 0 1px #e8c291 inset;
+    box-shadow: 0 0 0 1px #e8c291 inset;
+}
+
+#inputs input:disabled
+{
+    background-color: inherit;
+    border: none;
+    box-shadow:none;
+    font-size:12px;
+    padding-top:14px;
+
+}
+
+/*--------------------*/
+
+#actions
+{
+    margin: 3px 0 5px 0;
+}
+
+#actions .checkbox-text
+{
+    color:#717171;
+    font-size:13px;
+}
+
+#actions .checkbox
+{
+    margin: 0 0 15px 0;
+}
+
+#submit,#submitknop
+{		
+    background-color: #ffb94b;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#fddb6f), to(#ffb94b));
+    background-image: -webkit-linear-gradient(top, #fddb6f, #ffb94b);
+    background-image: -moz-linear-gradient(top, #fddb6f, #ffb94b);
+    background-image: -ms-linear-gradient(top, #fddb6f, #ffb94b);
+    background-image: -o-linear-gradient(top, #fddb6f, #ffb94b);
+    background-image: linear-gradient(top, #fddb6f, #ffb94b);
+    
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    
+    text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+    
+     -moz-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.3) inset;
+     -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.3) inset;
+     box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.3) inset;    
+    
+    border-width: 1px;
+    border-style: solid;
+    border-color: #d69e31 #e3a037 #d5982d #e3a037;
+
+    float: left;
+    height: 35px;
+    padding: 0px 35px;
+    cursor: pointer;
+    font: bold 15px Arial, Helvetica;
+    color: #8f5a0a;
+}
+
+#submit:hover,#submit:focus,#submitknop:hover,#submitknop:focus
+{		
+    background-color: #fddb6f;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#ffb94b), to(#fddb6f));
+    background-image: -webkit-linear-gradient(top, #ffb94b, #fddb6f);
+    background-image: -moz-linear-gradient(top, #ffb94b, #fddb6f);
+    background-image: -ms-linear-gradient(top, #ffb94b, #fddb6f);
+    background-image: -o-linear-gradient(top, #ffb94b, #fddb6f);
+    background-image: linear-gradient(top, #ffb94b, #fddb6f);
+}	
+
+#submit:active, #submitknop:active
+{		
+    outline: none;
+   
+     -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;
+     -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;
+     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;		
+}
+
+#submit::-moz-focus-inner,#submitknop::-moz-focus-inner
+{
+  border: none;
+}
+
+#actions a
+{
+    color: #009f43;    
+    float: right;
+    line-height: 35px;
+    margin-left: 10px;
+    font-size:11px;
+}
+
+
+
+
+

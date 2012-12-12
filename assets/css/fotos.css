@@ -1,0 +1,23 @@
+.album_tile {
+	float:left;
+	padding: 20px;
+}
+
+.album_tile:hover { background: #fff; }
+
+.album_thumbnail { height: 150px; }
+
+.photo_tile {
+	float:left;
+	padding: 20px;
+	min-width:210px;
+	max-width:210px;
+	text-align:center;
+}
+
+.photo_tile:hover { background: #fff; }
+
+.photo_thumbnail {
+	height: 150px;
+	max-width: 210px;
+}

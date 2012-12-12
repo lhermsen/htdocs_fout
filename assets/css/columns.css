@@ -1,0 +1,87 @@
+#columncontainer {
+	margin-bottom:500px;
+}
+
+#left1 input[type='checkbox'], #left1_beheer input[type='checkbox'] {
+	float:left;margin-right:5px;
+}
+
+.clear {
+	clear:both;
+}
+
+.alignright {
+	text-align:right;
+}
+
+.maincheckbox {
+	display:none;
+	margin-left:20px;
+}
+
+#gegevens_lid td {
+	padding-bottom:10px;
+}
+
+#left1_beheer, #left2_beheer, #left3_beheer {position:absolute; left:0; top:110px; bottom:200px; padding:5px; font-size:1em; z-index:4; overflow:auto;}
+#left1_beheer {width:22%; left:0; background:#FDF4D1;}
+#left2_beheer {width:29%; left:23%; background:#F9E9B2;}
+#left3_beheer {width:46%; left:53%; background:#ECDB9F;}
+
+#left1, #left2, #left3 {position:absolute; left:0; top:125px; bottom:182px; padding:5px; font-size:1em; z-index:4; overflow:auto;}
+#left1 {width:22%; left:10px; background:#E8E8E8;}
+#left2 {width:29%; left:23%; background:#F0F0F0;}
+#left3 {width:46%; left:522px; background:#F9F9F9;}
+
+.inner {display:block; padding:0 10px 10px 10px;}
+.bold {font-size:1.5em; font-weight:bold;}
+
+#rondehoeken
+{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 11px;
+	margin: 0px;
+	width: 100%;
+	text-align: left;
+	border-collapse: collapse;
+	line-height: 16px;
+}
+#rondehoeken thead th.eerste
+{
+	background: #DADADA url('/assets/images/icons/table-images/left.png') left -1px no-repeat;
+}
+#rondehoeken thead th.laatste
+{
+	background: #DADADA url('/assets/images/icons/table-images/right.png') right -1px no-repeat;
+}
+#rondehoeken th {
+	text-align: left;
+	padding-top: 5px;
+	padding-bottom: 4px;
+	padding-left: 8px;
+	padding-right: 8px;
+	font-weight: normal;
+	font-size: 12px;
+	color: #333333;
+	background: #DADADA;
+}
+#rondehoeken td {
+	padding: 3px 5px;
+	padding-left: 8px;
+	background: #F3F3F3;
+	border-top: 1px solid #fff;
+	color: #545454;
+}
+#rondehoeken tfoot td.rondeonderkant-links {
+	background: #F3F3F3 url('/assets/images/icons/table-images/botleft.png') left bottom no-repeat;
+	line-height: 20px;
+	padding-left:90px;
+	text-align: center;
+	
+}
+#rondehoeken tfoot td.rondeonderkant-rechts {
+	background: #F3F3F3 url('/assets/images/icons/table-images/botright.png') right bottom no-repeat;
+}
+#rondehoeken tbody tr:hover td {
+	background: #E6E6E6;
+}
