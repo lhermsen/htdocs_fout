@@ -7,9 +7,7 @@ class Donateur extends CI_Controller {
 		// Laad de views
 		
 		$this->pagina->header();
-		$this->load->view('reunisten/nieuwsbox');
-		$this->load->view('reunisten/navigatie');
-		$this->load->view('reunisten/suggesties');
+		$this->load->view('reunisten/doneren');
 		$this->pagina->footer();
 	}
 	
@@ -20,6 +18,11 @@ class Donateur extends CI_Controller {
 		{
 			// Creëer nieuwe donateur in de database en laat email sturen
 			$this->donateur_model->nieuw($_POST);
+			
+			// Geef melding dat het is gelukt om de donateur in te voeren
+			
+			$sMelding = "Gelukt! Wij hebben uw gegevens in goede orde ontvangen. Dank u wel voor uw donateurschap.";
+			$this->melding->geef('succes',$sMelding, 'Donateur toegevoegd');
 		} 
 		else
 		{

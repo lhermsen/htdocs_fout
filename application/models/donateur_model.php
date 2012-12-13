@@ -14,7 +14,7 @@ class Donateur_model extends CI_Model {
 		
 		// Stuur e-mail naar de nieuwe donateur
 	
-		$sBericht = $this->load->view('emails/nieuwe_donateur',$aGegevens, true);
+		$sBericht = $this->load->view('emails/reunisten/nieuwe_donateur',$aGegevens, true);
 
 		$this->email->to($aGegevens['emailadres']);
 		$this->email->subject($aGegevens['voornaam'].' '.$aGegevens['achternaam'].', dank voor uw donateurschap');
