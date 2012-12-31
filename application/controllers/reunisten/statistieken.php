@@ -6,8 +6,8 @@ class Statistieken extends CI_Controller {
 	{
 		// Laad de views
 		
-		$this->pagina->header();
+		$this->pagina->header('','reunisten');
 		$this->load->view('reunisten/statistieken');
-		$this->pagina->footer();
+		$this->pagina->footer('','reunisten');
 	}
 }

@@ -41,7 +41,7 @@ class Taak_model extends CI_Model {
 		// Wijzig in database en return true bij succes
 		
 		$this->db->where('id', $this->aDatabase['id']);
-		if(!$this->db->update('gebruikers', $aGegevens)) return false;
+		if(!$this->db->update('taken', $aGegevens)) return false;
 		return true;
 	}
 	
@@ -50,7 +50,7 @@ class Taak_model extends CI_Model {
 		// Verwijder uit database en return true bij succes
 		
 		this->db->where('id', $this->aDatabase['id']);
-		if(!$this->db->delete('gebruikers')) return false;
+		if(!$this->db->delete('taken')) return false;
 		return true;
 	}
 }

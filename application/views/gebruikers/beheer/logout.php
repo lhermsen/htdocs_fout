@@ -1,0 +1,1 @@
+de uitlog-knop uit het beheerdersgedeelte

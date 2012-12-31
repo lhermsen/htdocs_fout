@@ -6,13 +6,15 @@ class Profiel_reunist extends Profiel {
 	{
 		// Laad het formulier en geef de gegevens van de gebruiker door aan de view
 		
-		$this->pagina->header();
+		$this->pagina->header('','reunisten');
 		$this->load->view('reunisten/profiel', array('aGebruiker' => $this->gebruiker_model->aDatabase));
-		$this->pagina->footer();
+		$this->pagina->footer('','reunisten');
 	}
 	
 	public function toon_formulier()
 	{
+		$this->pagina->header('','reunisten');
 		$this->load->view('reunisten/profiel', array('aGebruiker' => $this->gebruiker_model->aDatabase));
+		$this->pagina->footer('','reunisten');
 	}	
 }

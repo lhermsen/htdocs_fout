@@ -29,6 +29,9 @@ class Gebruiker_model extends CI_Model {
 		$this->db->insert('gebruikers',$aGegevens);
 		$iId = $this->db->insert_id();
 		
+		// Zet deze toevoeging in het databaselogboek
+		$this->databaselogboek_model->nieuwe_rij('gebruikers', $iId, $aGegevens, $_SESSION['gebruiker']);
+		
 		// Codeer het idnummer voor de activatielink
 		
 		$sIdEncrypted = $this->encrypt->encode($iId);
@@ -84,7 +87,7 @@ class Gebruiker_model extends CI_Model {
 	function publiekelijk()
 	{			
 		// Zet in een array de id van deze subgroep waartoe deze gebruiker behoort (publiekelijk)
-		$this->aSubgroepIds = array(99999999);
+		$this->aSubgroepIds = array(0);
 	}
 	
 	function authenticeer($sEmail = '', $sMd5Wachtwoord = '')
@@ -179,44 +182,41 @@ class Gebruiker_model extends CI_Model {
 	
 	function wachtwoord_instellen($sIdGecodeerd, $sWachtwoord)
 	{
-		try
-		{
-			$iId = $this->decodeer_id($sIdGecodeerd); // Decodeer Id-nummer
-			
-			// Zet het wachtwoord in de database
-			
-			$sMd5Wachtwoord = md5($sWachtwoord);
-			
-			$this->db->where('id', $iId);
-			$this->db->update('gebruikers', array('wachtwoord' => $sMd5Wachtwoord));
-			
-			$this->refresh(); // Update de waarden van dit object
-			
-			// Stuur een email naar de gebruiker met behulp van de email library
-			
-			$sBericht = $this->load->view('emails/wachtwoord_ingesteld',$aDatabase, true);
-			
-			$this->email->to($aDatabase['emailadres']);
-			$this->email->subject('Wachtwoord Ingesteld');
-			$this->email->verzend_bericht($sBericht);
-		}
-		catch(Exception $e)
-		{
-			return false;
-		}
+		// Zet de waarden van dit object naar ingevoerd gecodeerd id-nummer
+		$this->set($iId, true);
+		
+		// Kijk of een gebruiker is gevonden
+		if(empty($this->aDatabase['id'])) return false;
+		
+		// Check of wachtwoordveld leeg is. Zo niet, return false
+		if(!empty($this->aDatabase['wachtwoord'])) return false;
+		
+		// Zet het wachtwoord in de database
+		$this->wijzig(array('wachtwoord'=>$sWachtwoord));
+
+		// Stuur een email naar de gebruiker met behulp van de email library
+		
+		$sBericht = $this->load->view('emails/wachtwoord_ingesteld',$aDatabase, true);
+		
+		$this->email->to($aDatabase['emailadres']);
+		$this->email->subject('Wachtwoord Ingesteld');
+		$this->email->verzend_bericht($sBericht);
 		
 		return true;
 	}
 	
 	function reset_wachtwoord($sEmailadres)
 	{
-		// Selecteer gebruiker bij dit emailadres.
+		// Selecteer gebruiker bij dit emailadres
 		
 		$this->db->where('emailadres', $sEmailadres);
 		$aGebruiker = $this->db->get('gebruikers')->row_array();
 		
-		// Als er geen gebruiker wordt gevonden bij het emailadres, return false
-		if(empty($aGebruiker['id'])) return false;
+		// Zet de waarden van dit object naar gevonden id-nummer
+		$this->set($aGebruiker['id']);
+		
+		// Kijk of een gebruiker is gevonden. Zo niet, return false.
+		if(empty($this->aDatabase['id'])) return false;
 		
 		// Genereer random wachtwoord
 		
@@ -225,10 +225,7 @@ class Gebruiker_model extends CI_Model {
 		$sMd5RandomWachtwoord = md5($sRandomWachtwoord);
 		
 		// Zet het nieuwe wachtwoord in de database
-		
-		$this->db->update('gebruikers', array('wachtwoord'=>$sMd5RandomWachtwoord));
-		
-		$this->refresh(); // Update de waarden van dit object
+		$this->wijzig(array('wachtwoord' => $sMd5RandomWachtwoord));
 		
 		// Stuur email
 		
@@ -249,7 +246,11 @@ class Gebruiker_model extends CI_Model {
 		$this->db->where('id', $this->aDatabase['id']);
 		if(!$this->db->update('gebruikers', $aGegevens)) return false;
 		
-		$this->refresh(); // Update de waarden van dit object
+		// Zet de wijziging in het logboek
+		$this->databaselogboek_model->wijzigingen('gebruikers', $this->aDatabase['id'], $this->aDatabase, $aGegevens, $_SESSION['gebruiker']);
+
+		// Update de waarden van dit object
+		$this->refresh(); 
 		
 		return true;
 	}
@@ -257,7 +258,7 @@ class Gebruiker_model extends CI_Model {
 	function is_reunist()
 	{
 		// Return true als deze gebruiker behoort tot de subgroep 'reunisten'
-		if(in_array('reunisten',$this->aSubgroepnamen)) return true;
+		if(in_array('Reunisten',$this->aSubgroepnamen)) return true;
 		
 		// Zo niet, return false
 		return false;

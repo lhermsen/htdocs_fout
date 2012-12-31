@@ -6,8 +6,8 @@ class Agenda extends CI_Controller {
 	{
 		// Laad de views
 		
-		$this->pagina->header();
+		$this->pagina->header('','reunisten');
 		$this->load->view('reunisten/agenda');
-		$this->pagina->footer();
+		$this->pagina->footer('','reunisten');
 	}
 }

@@ -13,7 +13,9 @@ class Profiel extends CI_Controller {
 	
 	public function toon_formulier()
 	{
+		$this->pagina->header();
 		$this->load->view('leden/profiel', array('aGebruiker' => $this->gebruiker_model->aDatabase));
+		$this->pagina->footer();
 	}
 	
 	public function verwerk()

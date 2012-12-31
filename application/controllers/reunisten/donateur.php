@@ -6,9 +6,9 @@ class Donateur extends CI_Controller {
 	{
 		// Laad de views
 		
-		$this->pagina->header();
+		$this->pagina->header('','reunisten');
 		$this->load->view('reunisten/doneren');
-		$this->pagina->footer();
+		$this->pagina->footer('','reunisten');
 	}
 	
 	public function verwerk()

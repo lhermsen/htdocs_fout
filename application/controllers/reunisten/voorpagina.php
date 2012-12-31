@@ -6,10 +6,10 @@ class Voorpagina extends CI_Controller {
 	{
 		// Laad de views
 		
-		$this->pagina->header();
+		$this->pagina->header('','reunisten');
 		$this->load->view('reunisten/nieuwsbox');
 		$this->load->view('reunisten/navigatie');
 		$this->load->view('reunisten/suggesties');
-		$this->pagina->footer();
+		$this->pagina->footer('','reunisten');
 	}
 }

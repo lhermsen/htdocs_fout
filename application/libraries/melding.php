@@ -15,6 +15,7 @@ class Melding {
 		
 		// Log de melding in de database
 		
+		if($sType == 'fatale_fout') $sLogOpmerkingen .= ' - ip:'.$this->input->ip_address();
 		$aMelding = array('type'=>$sType,'melding'=>$sMelding,'opmerkingen'=>$sLogOpmerkingen);
 		$CI->db->insert('meldingenlogboek',$aMelding);
 		

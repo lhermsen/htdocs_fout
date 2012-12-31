@@ -29,3 +29,13 @@ $config['iAantalSecondenBlokkeren'] = 60;
 
 // Hoeveel berispingen voordat het ipadres geblokkeerd wordt
 $config['iLimietBerispingen'] = 4;
+
+
+/*
+|--------------------------------------------------------------------------
+| CMS
+|--------------------------------------------------------------------------
+*/
+
+// Gebruikersnaam
+$config['sCMSGebruikersnaam'] = "nonomes";
